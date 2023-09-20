@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Memo from "./components/Memo";
+import Inputs from "./components/ui/inputSection/Inputs";
 
 export default function App() {
   interface FinalObject {
@@ -140,12 +141,17 @@ export default function App() {
   }, [commission, othersCost, tax, totalPrice]);
 
   const fishObj = {
-    others: "অন্যান্য",
-    rui: "রুই",
-    mirge: "মৃগে",
+    others: "অন্যান্য:",
+    rui: "রুই:",
+    mrige: "মৃগে:",
     telapia: "তেলা:",
-    silver: "সিল:/বিগ",
+    silvar: "সিল:/বিগ:",
     japani: "জাপ:",
+  };
+  const handleDelete = (id: number) => {
+    console.log(id);
+    const newHistory = histories.filter((item) => item.id !== id);
+    setHistories(newHistory);
   };
 
   return (
@@ -221,7 +227,7 @@ export default function App() {
                             colSpan={2}
                             className="whitespace-nowrap border-r px-2 py-2 font-medium dark:border-neutral-500"
                           >
-                            ক্যাঁচা বিক্রিঃ {totalPrice} tk
+                            কাঁচা বিক্রিঃ {totalPrice} tk
                           </td>
                         </tr>
                       </tbody>
@@ -230,12 +236,12 @@ export default function App() {
                           <th
                             scope="row"
                             colSpan={3}
-                            className=" py-3 px-2  border-b-2  text-sm font-light text-center text-red-500 "
+                            className=" py-1 px-2  border-b-2  text-sm font-light text-center text-red-500 "
                           >
                             কমিশন
                           </th>
 
-                          <td className="  py-3 px-2 border-b-2  text-sm text-center text-red-500 ">
+                          <td className="  py-1 px-2 border-b-2  text-sm text-center text-red-500 ">
                             - <strong>{commission}</strong> TK
                           </td>
                         </tr>
@@ -243,12 +249,12 @@ export default function App() {
                           <th
                             scope="row"
                             colSpan={3}
-                            className="  py-3 px-2  border-b-2 text-sm font-light text-center text-red-500 "
+                            className="  py-1 px-2  border-b-2 text-sm font-light text-center text-red-500 "
                           >
                             কয়েলি
                           </th>
 
-                          <td className=" py-3 px-2 border-b-2 text-sm text-center text-red-500 ">
+                          <td className=" py-1 px-2 border-b-2 text-sm text-center text-red-500 ">
                             - <strong>{othersCost}</strong> TK
                           </td>
                         </tr>
@@ -256,12 +262,12 @@ export default function App() {
                           <th
                             scope="row"
                             colSpan={3}
-                            className="  py-3 px-2 border-b-2 text-sm font-light text-center text-red-500 "
+                            className="  py-1 px-2 border-b-2 text-sm font-light text-center text-red-500 "
                           >
                             খাজনা
                           </th>
 
-                          <td className=" py-3 px-2 border-b-2 text-sm text-center text-red-500 ">
+                          <td className=" py-1 px-2 border-b-2 text-sm text-center text-red-500 ">
                             - <strong>{tax}</strong> TK
                           </td>
                         </tr>
@@ -269,7 +275,7 @@ export default function App() {
                           <th
                             scope="row"
                             colSpan={3}
-                            className=" py-3 px-2  border-b-2 text-base  font-normal text-center text-green-700 "
+                            className=" py-1 px-2  border-b-2 text-base  font-normal text-center text-green-700 "
                           >
                             Total
                           </th>
@@ -295,76 +301,21 @@ export default function App() {
           </h1>
         </div>
         <div className="middle flex flex-col gap-4">
-          <form className=" flex flex-col gap-5">
-            <div className=" flex flex-col gap-3">
-              <label htmlFor="name">মাছের নাম</label>
-              <select
-                className="input border-2 p-2 rounded"
-                value={name}
-                name="name"
-                onChange={(e) => setName(e.target.value)}
-              >
-                <option value="others">অন্যান্য</option>
-                <option value="rui">রুই</option>
-                <option value="mrige">মৃগে</option>
-                <option value="telapia">তেলা:</option>
-                <option value="silvar">সিল:/বিগ:</option>
-                <option value="japani">জাপ:</option>
-              </select>
-            </div>
-            <div className=" flex flex-col gap-3">
-              <label htmlFor="name">মাছের দাম </label>
-              <input
-                name="bid"
-                type="text"
-                className="border-2 p-2 input rounded"
-                placeholder="3200"
-                value={fishBid === 0 ? "" : fishBid}
-                onChange={(e) => {
-                  setFishBid(parseInt(e.target.value));
-                }}
-              />
-            </div>
-            <div className=" flex flex-col gap-3">
-              <label htmlFor="name">মাছের ওজন</label>
-              <input
-                name="weight"
-                type="text"
-                className="input border-2 p-4 rounded"
-                placeholder="24+25+22"
-                value={weight}
-                onChange={handleWeightChange}
-              />
-            </div>
-            <div className="preview flex justify-between ">
-              <div className="">
-                <p>
-                  ওজন: <strong> {finalWeight} </strong>কেজি
-                </p>
-                <p>
-                  দাম: <strong> {finalPrice} </strong> টাকা
-                </p>
-              </div>
-            </div>
-            <div className="button flex justify-between">
-              {show ? (
-                <button
-                  disabled={disable}
-                  onClick={handleAddValue}
-                  className={`btn ${disable ? "bg-gray-700" : "bg-yellow-600"}`}
-                >
-                  হিসেবে অন্তর্ভুক্ত করুন
-                </button>
-              ) : (
-                <button onClick={handleClear} className="btn bg-green-600">
-                  নতুন হিসাব শুরু করুন
-                </button>
-              )}
-              <button onClick={handleCalculation} className="btn bg-blue-600">
-                দাম হিসাব করুন
-              </button>
-            </div>
-          </form>
+          <Inputs
+            disable={disable}
+            finalPrice={finalPrice}
+            finalWeight={finalWeight}
+            fishBid={fishBid}
+            handleAddValue={handleAddValue}
+            handleCalculation={handleCalculation}
+            handleClear={handleClear}
+            handleWeightChange={handleWeightChange}
+            show={show}
+            name={name}
+            setFishBid={setFishBid}
+            setName={setName}
+            weight={weight}
+          />
           <div className="list border max-h-40  overflow-scroll overflow-x-hidden overflow-y-scroll no-scrollbar p-2">
             <ul className="flex flex-col gap-2">
               {histories.map((item) => (
@@ -374,15 +325,22 @@ export default function App() {
                 >
                   <div className="flex gap-2">
                     {/* <p className="">{fishObj.`${item.name}`}:</p> */}
-                    <p className="">{fishObj[item.name as keyof object]}</p>
+                    {/* <p className="">{fishObj[item.name as keyof object]}</p> */}
+                    <span>ওজন: {item.finalWeight} =</span>
                     <p className="">{item.weight}</p>
                   </div>
                   <div className="flex justify-between">
-                    <span>দর: {item.bid}</span>
-                    <span>ওজন: {item.finalWeight}</span>
+                    <span>
+                      {fishObj[item.name as keyof object]}
+                      {item.bid}
+                    </span>
+
                     <span>দাম: {item.price}</span>
-                    <button className="  px-2 py-1 rounded text-white bg-purple-600">
-                      Update
+                    <button
+                      onClick={() => handleDelete(item.id)}
+                      className="  px-2 py-1 rounded text-white bg-red-600"
+                    >
+                      মুছে ফেলুন
                     </button>
                   </div>
                 </li>
@@ -391,7 +349,7 @@ export default function App() {
           </div>
         </div>
         <div className="bottom flex w-full">
-          <button onClick={handleFinalCal} className="btn w-full bg-red-600">
+          <button onClick={handleFinalCal} className="btn w-full bg-purple-600">
             হিসাব করুন
           </button>
           {/* <button className="btn bg-pink-600">সংরক্ষণ করুন</button> */}
