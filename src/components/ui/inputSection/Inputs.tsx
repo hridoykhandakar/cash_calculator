@@ -55,7 +55,9 @@ const Inputs = ({
             type="text"
             className="border-2 p-2 input rounded"
             placeholder="3200"
-            value={fishBid === 0 ? "" : fishBid}
+            value={
+              (fishBid === 0 || Number.isNaN(fishBid)) ? "" : fishBid
+            }
             onChange={(e) => {
               setFishBid(parseInt(e.target.value));
             }}
