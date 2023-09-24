@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Memo from "./components/Memo";
-import Inputs from "./components/ui/inputSection/Inputs";
+import Inputs from "./components/inputSection/Inputs";
 
 export default function App() {
   interface FinalObject {

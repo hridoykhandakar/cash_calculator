@@ -32,21 +32,25 @@ const Inputs = ({
   return (
     <div>
       <form className=" flex flex-col gap-5">
-        <div className=" flex flex-col gap-3">
+        <div className=" flex flex-col gap-3 ">
           <label htmlFor="name">মাছের নাম</label>
-          <select
-            className="input border-2 p-2 rounded"
-            value={name}
-            name="name"
-            onChange={(e) => setName(e.target.value)}
-          >
-            <option value="others">অন্যান্য</option>
-            <option value="rui">রুই</option>
-            <option value="mrige">মৃগে</option>
-            <option value="telapia">তেলা:</option>
-            <option value="silvar">সিল:/বিগ:</option>
-            <option value="japani">জাপ:</option>
-          </select>
+          <div className="">
+            <select
+              className="input border-2 p-2  rounded"
+              value={name}
+              name="name"
+              onChange={(e) => setName(e.target.value)}
+            >
+              <option className="" value="others">
+                অন্যান্য
+              </option>
+              <option value="rui">রুই</option>
+              <option value="mrige">মৃগে</option>
+              <option value="telapia">তেলা:</option>
+              <option value="silvar">সিল:/বিগ:</option>
+              <option value="japani">জাপ:</option>
+            </select>
+          </div>
         </div>
         <div className=" flex flex-col gap-3">
           <label htmlFor="name">মাছের দাম </label>
@@ -55,9 +59,7 @@ const Inputs = ({
             type="text"
             className="border-2 p-2 input rounded"
             placeholder="3200"
-            value={
-              (fishBid === 0 || Number.isNaN(fishBid)) ? "" : fishBid
-            }
+            value={fishBid === 0 || Number.isNaN(fishBid) ? "" : fishBid}
             onChange={(e) => {
               setFishBid(parseInt(e.target.value));
             }}
