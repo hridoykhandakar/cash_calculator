@@ -33,7 +33,7 @@ const Inputs = ({
     <div>
       <form className=" flex flex-col gap-5">
         <div className=" flex flex-col gap-3 ">
-          <label htmlFor="name">মাছের নাম</label>
+          <label htmlFor="name">Fish Name</label>
           <div className="">
             <select
               className="input border-2 p-2  rounded"
@@ -53,7 +53,7 @@ const Inputs = ({
           </div>
         </div>
         <div className=" flex flex-col gap-3">
-          <label htmlFor="name">মাছের দাম </label>
+          <label htmlFor="name">Price </label>
           <input
             name="bid"
             type="text"
@@ -66,7 +66,7 @@ const Inputs = ({
           />
         </div>
         <div className=" flex flex-col gap-3">
-          <label htmlFor="name">মাছের ওজন</label>
+          <label htmlFor="name">Weight</label>
           <input
             name="weight"
             type="text"
@@ -79,10 +79,10 @@ const Inputs = ({
         <div className="preview flex justify-between ">
           <div className="">
             <p>
-              ওজন: <strong> {finalWeight} </strong>কেজি
+              Weight: <strong> {finalWeight} </strong>KG
             </p>
             <p>
-              দাম: <strong> {finalPrice} </strong> টাকা
+              Price: <strong> {finalPrice} </strong> Taka
             </p>
           </div>
         </div>
@@ -93,15 +93,15 @@ const Inputs = ({
               onClick={handleAddValue}
               className={`btn ${disable ? "bg-gray-700" : "bg-yellow-600"}`}
             >
-              হিসেবে অন্তর্ভুক্ত করুন
+              Add to List
             </button>
           ) : (
             <button onClick={handleClear} className="btn bg-green-600">
-              নতুন হিসাব শুরু করুন
+              New
             </button>
           )}
           <button onClick={handleCalculation} className="btn bg-blue-600">
-            দাম হিসাব করুন
+            Calculate
           </button>
         </div>
       </form>

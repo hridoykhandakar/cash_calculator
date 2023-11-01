@@ -140,14 +140,14 @@ export default function App() {
     setFinalTotal(Math.round(z));
   }, [commission, othersCost, tax, totalPrice]);
 
-  const fishObj = {
-    others: "অন্যান্য:",
-    rui: "রুই:",
-    mrige: "মৃগে:",
-    telapia: "তেলা:",
-    silvar: "সিল:/বিগ:",
-    japani: "জাপ:",
-  };
+  // const fishObj = {
+  //   others: "অন্যান্য:",
+  //   rui: "রুই:",
+  //   mrige: "মৃগে:",
+  //   telapia: "তেলা:",
+  //   silvar: "সিল:/বিগ:",
+  //   japani: "জাপ:",
+  // };
   const handleDelete = (id: number) => {
     console.log(id);
     const newHistory = histories.filter((item) => item.id !== id);
@@ -205,7 +205,7 @@ export default function App() {
                             className="border-b dark:border-neutral-500"
                           >
                             <td className="whitespace-nowrap border-r px-2 py-1 font-medium dark:border-neutral-500">
-                              {fishObj[item.name as keyof object]}
+                              {item.name}
                             </td>
                             <td className="whitespace-nowrap border-r px-2 py-1 dark:border-neutral-500">
                               {item.finalWeight}
@@ -326,21 +326,21 @@ export default function App() {
                   <div className="flex gap-2">
                     {/* <p className="">{fishObj.`${item.name}`}:</p> */}
                     {/* <p className="">{fishObj[item.name as keyof object]}</p> */}
-                    <span>ওজন: {item.finalWeight} =</span>
+                    <span>Weight: {item.finalWeight} =</span>
                     <p className="">{item.weight}</p>
                   </div>
                   <div className="flex justify-between">
                     <span>
-                      {fishObj[item.name as keyof object]}
+                      {item.name}
                       {item.bid}
                     </span>
 
-                    <span>দাম: {item.price}</span>
+                    <span>Price: {item.price}</span>
                     <button
                       onClick={() => handleDelete(item.id)}
                       className="  px-2 py-1 rounded text-white bg-red-600"
                     >
-                      মুছে ফেলুন
+                      Clear
                     </button>
                   </div>
                 </li>
@@ -349,8 +349,11 @@ export default function App() {
           </div>
         </div>
         <div className="bottom flex w-full">
-          <button onClick={handleFinalCal} className="btn w-full bg-purple-600">
-            হিসাব করুন
+          <button
+            onClick={handleFinalCal}
+            className="btn w-full bg-purple-600 font-bold"
+          >
+            Calculate
           </button>
           {/* <button className="btn bg-pink-600">সংরক্ষণ করুন</button> */}
         </div>
