@@ -50,6 +50,9 @@ export default function App() {
   // function
   // effect
 
+  // totalScales State
+  const [totalScales, setTotalScales] = useState(0);
+
   const handleWeightChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setWeight(e.target.value);
 
@@ -101,6 +104,21 @@ export default function App() {
     setHistories([historyObj, ...histories]);
     console.log(histories);
   }
+
+  // Scales ==========================================================start
+  function getScales(item: any) {
+    const scales = item.weight.split("+").length;
+    return scales;
+  }
+  function handleScales(items: any) {
+    let number = 0;
+    items.forEach((item: any) => {
+      const totalWeight = getScales(item);
+      number += totalWeight;
+    });
+    setTotalScales((prevState) => prevState + number);
+  }
+  // Scales ==========================================================end
   function handleFinalCal(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
     let totalPrice = 0;
@@ -116,6 +134,8 @@ export default function App() {
     const y = (totalPrice / 100) * 4;
     setCommission(Math.round(y));
     setTax(Math.round(x * 10));
+
+    handleScales(histories);
 
     openModal();
   }
@@ -161,6 +181,7 @@ export default function App() {
           <h1 className="text-center font-bold text-2xl my-6 underline underline-offset-8 decoration-purple-900">
             খন্দকার ইন্তাজ ফিস
           </h1>
+          <p>Scales is : {totalScales}</p>
           <div className="flex justify-between">
             <div className="date">Date: {formattedToday}</div>
             <div className="time">Time: {now}</div>
